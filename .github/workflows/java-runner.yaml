@@ -23,6 +23,7 @@ jobs:
     strategy:
       matrix:
         java-version: [11]
+        os: [ubuntu-latest, windows-2016]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
