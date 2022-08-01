@@ -1,0 +1,7 @@
+1. HOw to check the size of the remainng storage 
+df -H
+
+2. du vs df 
+du is used to estimate file space usage—space used under a particular directory or files on a file system.
+ 
+df is used to display the amount of available disk space for file systems on which the invoking user has appropriate read access.
