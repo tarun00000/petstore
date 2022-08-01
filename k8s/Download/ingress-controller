@@ -1,0 +1,37 @@
+kubectl create ns ingress-nginx
+
+kubectl -n ingress-nginx apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/cloud/deploy.yaml
+
+kubectl -n ingress-nginx --address 0.0.0.0 port-forward svc/ingress-nginx-controller 80
+kubectl -n ingress-nginx --address 0.0.0.0 port-forward svc/ingress-nginx-controller 443
+
+
+install helm 
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+helm repo add bitnami https://charts.bitnami.com/bitnami
+or
+helm repo add nginx-stable https://helm.nginx.com/stable
+
+helm install nginx-ingress-controller bitnami/nginx-ingress-controller
+
+curl ifconfig.co
+
+kubectl explain pod
+
+kubectl patch deployment ingress-nginx-controller -p '{"spec":{"containers":[{"name": "controller","image": "quay.io/aledbf/nginx-ingress-controller:0.334"}]}}'
+
+===
+https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/
+working ingress controller
+$ git clone https://github.com/nginxinc/kubernetes-ingress.git --branch v2.3.0
+$ cd kubernetes-ingress/deployments/helm-chart
+helm repo add nginx-stable https://helm.nginx.com/stable
+helm repo update
+helm install ingress-controller nginx-stable/nginx-ingress
+
+
+
+

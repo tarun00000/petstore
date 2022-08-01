@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: petstore-ingress
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - vatsfamily.ca
+    secretName: petstore-certificate-secret
+  rules:
+  - host: vatsfamily.ca
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: service-petstore
+            port:
+              number: 80
