@@ -54,3 +54,5 @@ jobs:
       - name: execute
         run: |
           mvn spring-boot:run 
+        env:
+          CI: true
