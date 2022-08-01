@@ -50,5 +50,4 @@ jobs:
       - name: deploy
         run: |
           mvn spring-boot:run &
-          sleep 20
           curl 127.0.0.1:8080
