@@ -47,8 +47,10 @@ jobs:
 
       - name: Build-with-Maven
         run: mvn clean install -DskipTests
-      
-      - name: deploy
+  
+  execut-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: execute
         run: |
-          mvn spring-boot:run &
-          curl 127.0.0.1:8080
+          mvn spring-boot:run 
