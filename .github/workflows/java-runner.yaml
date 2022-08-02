@@ -39,8 +39,8 @@ jobs:
       # In future workflow runs, the cache will be restored so that dependencies don't need to be downloaded from remote Maven repositories. 
       # You can cache dependencies simply using the setup-java action or can use cache action for custom and more advanced configuration.
       - name: setup-java-env
-        uses: actions/setup-java@v3
-        with:
+        uses: actions/setup-java@v3      # USes is a way to call github action
+        with:                            # with is way to passing argument to action   
           java-version: ${{matrix.java-version}}
           distribution: 'adopt'
           cache: maven
