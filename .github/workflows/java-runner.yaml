@@ -67,5 +67,3 @@ jobs:
       - name: execute
         run: |
           java -jar spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar
-        env:
-          CI: true
