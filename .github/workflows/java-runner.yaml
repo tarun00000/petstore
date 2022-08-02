@@ -50,8 +50,8 @@ jobs:
         
       - uses: actions/upload-artifact@v3
         with: 
-          name: jar artifcats
-          path: target/
+          name: jar-artifcats
+          path: target/spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar
       
   
   execut-and-test:
@@ -62,8 +62,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with: 
-          name: jar artifcats
-          path: target
+          name: jar-artifcats
           
       - name: execute
         run: |
