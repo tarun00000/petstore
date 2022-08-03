@@ -23,7 +23,7 @@ jobs:
     strategy:
       matrix:
         java-version: [11]
-        os: [ubuntu-latest, windows-2016]
+        os: [ubuntu-latest] #windows-2016
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -64,10 +64,11 @@ jobs:
       - uses: actions/download-artifact@v3
         with: 
           name: jar-artifcats
-      
+          
+      # calling guthub action 
       - name: create a release draft for a milestone from githubaction
-        id: create-release-draft
-        uses: ./
+        id: create-release-draft #you will use it getting outout put of the github action. 
+        uses: ./ #private github
         with:
           repo-token: ${{secrets.GITHUB_TOKEN}}
       - name: Print the URL of the realease draft
