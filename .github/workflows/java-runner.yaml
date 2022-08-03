@@ -55,7 +55,8 @@ jobs:
       
   
   execut-and-test:
-  
+    
+    name: exec-test
     runs-on: ubuntu-latest
     needs: build # this will make sure next step will run after build job
     
@@ -63,7 +64,15 @@ jobs:
       - uses: actions/download-artifact@v3
         with: 
           name: jar-artifcats
-          
+      
+      - name: create a release draft for a milestone from githubaction
+        id: create-release-draft
+        uses: ./
+        with:
+          repo-token: ${{secrets.GITHUB_TOKEN}}
+      - name: Print the URL of the realease draft
+        if: steps.create-release-draft.outputs.release-url !=''
+        run: echo ${{steps.create-release-draft.outputs.release-url}}
       - name: execute
         run: |
           java -jar spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar
