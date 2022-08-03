@@ -61,6 +61,7 @@ jobs:
     needs: build # this will make sure next step will run after build job
     
     steps:
+      - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with: 
           name: jar-artifcats
