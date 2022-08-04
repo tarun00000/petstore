@@ -10,6 +10,6 @@ outputs:
     description: 'The URL of the github release that was drafted'
 runs:
   using: 'docker'
-  image: 'workflows/Dockerfile'
+  image: '/workflows/Dockerfile'
   args:
     - ${{inputs.repo-token}}
