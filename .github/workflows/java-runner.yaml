@@ -72,12 +72,15 @@ jobs:
         uses: ./ #private github
         with:
           repo-token: ${{secrets.GITHUB_TOKEN}}
+          
       - name: Print the URL of the realease draft
         if: steps.create-release-draft.outputs.release-url !=''
         run: echo ${{steps.create-release-draft.outputs.release-url}}
+      
       - name: execute
         run: |
           java -jar spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar
+      
       - name: curl
         run: |
           sleep 20
