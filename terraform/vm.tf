@@ -9,7 +9,6 @@ output "tls_private_key" {
 }
 
 resource "azurerm_linux_virtual_machine" "petstore-vm" {
-  depends_on = [ azurerm_virtual_network.vnet-petstore , azurerm_network_interface.petstore-nic]
   name                = "petstore-vm"
   resource_group_name = azurerm_resource_group.resource-grp-dev.name
   location            = azurerm_resource_group.resource-grp-dev.location

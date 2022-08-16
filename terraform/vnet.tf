@@ -4,43 +4,50 @@
 
 
 resource "azurerm_virtual_network" "vnet-petstore" {
-  depends_on          = [azurerm_resource_group.resource-grp-dev]
   name                = "vnet-petstore"
   location            = azurerm_resource_group.resource-grp-dev.location
   resource_group_name = azurerm_resource_group.resource-grp-dev.name
   address_space       = var.vnet_cidr_range  
 
-  subnet {
-    name           = var.subnet_names[1]
-    address_prefix = var.subnet_prefixes[1]
-    security_group = data.azurerm_network_security_group.getNSGID.id
-  }
+#   subnet {
+#     name           = var.subnet_names[1]
+#     address_prefix = var.subnet_prefixes[1]
+#     security_group = azurerm_network_security_group.petstore-app-nsg.id
+#   }
 
   tags = local.tags
 }
 
 data "azurerm_virtual_network" "getVNETID"{
-  depends_on = [ azurerm_virtual_network.vnet-petstore]
   name                = azurerm_virtual_network.vnet-petstore.name
   resource_group_name = azurerm_resource_group.resource-grp-dev.name
 }
 
 resource "azurerm_subnet" "petstore-subnet-web" {
-  depends_on = [ azurerm_virtual_network.vnet-petstore]
   name                 = var.subnet_names[0]
   resource_group_name  = azurerm_resource_group.resource-grp-dev.name
   virtual_network_name = azurerm_virtual_network.vnet-petstore.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-resource "azurerm_subnet_network_security_group_association" "example" {
-  depends_on = [ azurerm_virtual_network.vnet-petstore, azurerm_subnet.petstore-subnet-web]
+resource "azurerm_subnet" "petstore-subnet-database" {
+    name           = var.subnet_names[1]
+    resource_group_name  = azurerm_resource_group.resource-grp-dev.name
+    virtual_network_name = azurerm_virtual_network.vnet-petstore.name
+    address_prefixes = ["10.0.0.0/24"]
+  }
+
+resource "azurerm_subnet_network_security_group_association" "petstore-web-nsg-association" {
   subnet_id                 = azurerm_subnet.petstore-subnet-web.id
-  network_security_group_id = data.azurerm_network_security_group.getNSGID.id
+  network_security_group_id = azurerm_network_security_group.petstore-app-nsg.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "petstore-database-nsg-association" {
+  subnet_id                 = azurerm_subnet.petstore-subnet-database.id
+  network_security_group_id = azurerm_network_security_group.petstore-app-nsg.id
 }
 
 resource "azurerm_network_interface" "petstore-nic" {
-  depends_on = [ azurerm_virtual_network.vnet-petstore, azurerm_subnet.petstore-subnet-web]
   name                = "petstore-nic"
   location            =  azurerm_resource_group.resource-grp-dev.location
   resource_group_name =  azurerm_resource_group.resource-grp-dev.name
