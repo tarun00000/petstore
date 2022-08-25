@@ -25,9 +25,6 @@ jobs:
        image: hashicorp/terraform
        env:
          HOME: /root
-#      defaults:
-#        run:
-#          shell: bash
      steps:
        - uses: actions/checkout@v3
        
