@@ -1,0 +1,38 @@
+name: terraform Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      project_name:
+        description: 'Name of the Project'
+        required: true
+      env_name:
+        description: 'Environment Name of the MMP dev/stag/prod'
+        required: true
+      tag_name:
+        description: 'Tag Azure/AWS/blog_azure/s3_aws'
+        required: false
+
+jobs:
+   terraform-plan:
+     runs-on: ubuntu-latest
+     env:
+      HOME: /root
+      SUBSCRIPTION_ID: ${{ secrets.GARDENER_CONFIG }}
+      CLIENT_ID: ${{ secrets.ANSIBLE_VAULT }}
+      CLIENT_SECRET: ${{ secrets.ROOT_GITHUB_TOKEN }}
+      TENANT_ID: ${{ secrets.ROOT_GITHUB_TOKEN }}
+     container:
+       image: hashicorp/terraform
+       env:
+         HOME: /root
+       defaults:
+         run:
+           shell: bash
+   steps:
+     - uses: actions/checkout@v3
+     - name: terraform-plan
+       run: |
+          cd terraform
+          terraform init
+          terraform plan
+          
