@@ -33,6 +33,7 @@ jobs:
        
        - name: terraform-plan
          run: |
+           ls -al
            cd terraform
            terraform init
            terraform plan
