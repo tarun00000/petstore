@@ -4,13 +4,13 @@ on:
     inputs:
       project_name:
         description: 'Name of the Project'
-        required: true
+        required: false
       env_name:
         description: 'Environment Name of the MMP dev/stag/prod'
         required: true
       tag_name:
         description: 'Tag Azure/AWS/blog_azure/s3_aws'
-        required: false
+        required: true
 
 jobs:
    terraform-plan:
