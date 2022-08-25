@@ -28,11 +28,12 @@ jobs:
        defaults:
          run:
            shell: bash
-   steps:
-     - uses: actions/checkout@v3
-     - name: terraform-plan
-       run: |
-          cd terraform
-          terraform init
-          terraform plan
+     steps:
+       - uses: actions/checkout@v3
+       
+       - name: terraform-plan
+         run: |
+           cd terraform
+           terraform init
+           terraform plan
           
