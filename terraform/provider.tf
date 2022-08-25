@@ -5,6 +5,13 @@ provider "azurerm"{
     client_secret   = var.client_secret
     tenant_id       = var.tenant_id 
     features {}
+    //alias   = "west" // if you are going ti create more than 1 instace of the provider .
+
+    // so later it can be used as 
+    // only example
+    # resource "azure_resource" "web_server" {
+    #   provider = aws.west
+    # }
 }
 
 terraform {
@@ -12,9 +19,15 @@ terraform {
 
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"
+      source  = "hashicorp/azurerm"       
       version = "3.18.0"
     }
+  }
+
+  // for random generating function. How to use look in locals.tf
+  random  = {
+    source  = "hashicorp/random"
+    version = "~> 3.0"
   }
 }
 
