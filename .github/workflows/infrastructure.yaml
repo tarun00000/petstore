@@ -17,10 +17,10 @@ jobs:
      runs-on: ubuntu-latest
      env:
       HOME: /root
-      SUBSCRIPTION_ID: ${{ secrets.GARDENER_CONFIG }}
-      CLIENT_ID: ${{ secrets.ANSIBLE_VAULT }}
-      CLIENT_SECRET: ${{ secrets.ROOT_GITHUB_TOKEN }}
-      TENANT_ID: ${{ secrets.ROOT_GITHUB_TOKEN }}
+      TF_VAR_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_SUBSCRIPTION_ID }}
+      TF_VAR_CLIENT_ID: ${{ secrets.TF_VAR_CLIENT_ID }}
+      TF_VAR_CLIENT_SECRET: ${{ secrets.TF_VAR_CLIENT_SECRET }}
+      TF_VAR_TENANT_ID: ${{ secrets.TF_VAR_TENANT_ID }}
      container:
        image: hashicorp/terraform
        env:
