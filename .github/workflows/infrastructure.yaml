@@ -22,7 +22,7 @@ jobs:
       TF_VAR_CLIENT_SECRET: ${{ secrets.TF_VAR_CLIENT_SECRET }}
       TF_VAR_TENANT_ID: ${{ secrets.TF_VAR_TENANT_ID }}
      container:
-       image: hashicorp/terraform
+       image: tarun00000/terraform-azure-cli:1.0.0
        env:
          HOME: /root
      steps:
@@ -32,6 +32,4 @@ jobs:
          run: |
            ls -al
            cd terraform
-           terraform init
-           terraform plan
-          
+           terraform init          
